@@ -24,7 +24,7 @@ public class Block
 
     private Block()
     {
-        _dataSigner = new DataSigner();
+        _dataSigner = new DataArbiterSigner();
         _dataHasher = new DataHasher();
     }
 
@@ -57,15 +57,17 @@ public class Block
     public async Task<bool> Verify(Block prevBlock = null)
     {
         var dataBytes = Encoding.UTF8.GetBytes(Data);
-        if (!await  _dataSigner.VerifyData(dataBytes, DataSign))
+        var dataTimeStampBytes = Encoding.UTF8.GetBytes(DataSignTimeStamp);
+        if (!await  _dataSigner.VerifyData(dataTimeStampBytes.Concat(dataBytes).ToArray(), DataSign))
         {
             return false;
         }
 
+        var hashTimeStampBytes = Encoding.UTF8.GetBytes(HashSignTimeStamp);
         var prevBlockHashString = prevBlock is not null ? Convert.ToBase64String(prevBlock.Hash) : "";
         var dataHashBytes = _dataHasher.GetHash(Data + Convert.ToBase64String(DataSign) + prevBlockHashString);
         
-        if (!await  _dataSigner.VerifyData(dataHashBytes, HashSign))
+        if (!await  _dataSigner.VerifyData(hashTimeStampBytes.Concat(dataHashBytes).ToArray(), HashSign))
         {
             return false;
         }

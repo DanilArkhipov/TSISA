@@ -24,7 +24,7 @@ public class VerifyBlocksCommand
 
 
             Block prevBlock = null;
-            for (int i = 0; i<blocks.Count - 1; i++)
+            for (int i = 0; i<blocks.Count; i++)
             {
                 if (!await blocks[i].Verify(prevBlock))
                 {
