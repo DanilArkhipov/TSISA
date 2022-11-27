@@ -3,7 +3,7 @@
 using BlockChainConsoleApp.Commands;
 
 
-string[] availableCommands = new string[]{"add-block", "print-blocks", "verify-block", "verify-blocks"};
+string[] availableCommands = new string[]{"add-block", "print-blocks", "verify-block", "verify-blocks", "send-weights"};
 
 if (args.Length == 0)
 {
@@ -25,6 +25,9 @@ else
             break;
         case "verify-blocks":
             await new VerifyBlocksCommand().Execute();
+            break;
+        case "send-weights":
+            await new SendWeightsCommand().Execute();
             break;
         default:
             Console.WriteLine("Не удалось распознать команду");
