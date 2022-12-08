@@ -16,5 +16,5 @@ public class NeuralWeightsModel
     public string w2 { get; set; }
     public string w3 { get; set; }
     public string e { get; set; }
-    public string publicKey { get; set; }
+    public string publickey { get; set; }
 }

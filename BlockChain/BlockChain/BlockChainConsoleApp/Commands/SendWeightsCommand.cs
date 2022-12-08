@@ -39,7 +39,7 @@ public class SendWeightsCommand
             w2 = "0.5394",
             w3 = "0.0641",
             e = "0.06462576122337255",
-            publicKey =  _publicKey
+            publickey =  _publicKey
         };
         var weightDataString = JsonSerializer.Serialize(weightData);
         var weightDataStringBytes = Encoding.UTF8.GetBytes(weightDataString);
@@ -57,7 +57,8 @@ public class SendWeightsCommand
         var block = new BlockModel()
         {
             data = weightData,
-            prevhash = BytesToHexString(hash),
+            //prevhash = BytesToHexString(hash),
+            prevhash = "885c10d7af60ee9373c85e468dac6d325c334aaca48f01ccb293f49aa7d36e4b",
             signature = BytesToHexString(sign.Item1)
         };
         var blockString = JsonSerializer.Serialize(block);
